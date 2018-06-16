@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+	<head>
+
+		<title>Control panel - Real Time Information Screen</title>
+
+		<link rel="stylesheet" href="/assets/dropzone/dist/dropzone.css">
+
+	</head>
+	<body>
+
+		<!-- SEND MESSAGE -->
+		<form id="form-message" action="">
+			<input id="send-message" autocomplete="off" />
+			<button>Send</button>
+		</form>
+
+		<!-- SEND IMAGE -->
+		<form id="form-upload-image" method="post" action="/upload-image" class="dropzone"></form>
+
+		<!-- PROD MODE -->
+		<form id="form-prodmode" action="">
+			<input type="checkbox" id="send-prodmode">
+			<button>Send PRODMODE</button>
+		</form>
+
+		<!-- SEND SOUND -->
+		<input id="sound-title" autocomplete="off" />
+		<form id="form-upload-sound" method="post" action="/upload-sound" class="dropzone"></form>
+
+		<!-- ABORT CURRENT -->
+		<form id="form-abort" action="">
+			<button>ABORT current overlay</button>
+		</form>
+
+		<script src="socket.io/socket.io.js"></script>
+		<script src="/assets/jquery/dist/jquery.min.js"></script>
+		<script src="/assets/dropzone/dist/dropzone.js"></script>
+
+		<script>
+
+			// Init Socket.io
+			var socket = io.connect();
+
+			// Send message to server
+			$("#form-message").submit(function(){
+				socket.emit("message", $("#send-message").val());
+				$("#send-message").val("");
+				return false;
+			});
+
+			// Send image to server
+			Dropzone.options.formUploadImage = {
+				paramName: "file",
+				maxFilesize: 5, // MB
+				dictDefaultMessage: "Drag an image here to upload, or click to select one",
+				acceptedFiles: "image/*",
+				init: function() {
+					this.on("success", function( file, resp ){
+						console.log( file );
+						console.log( resp );
+
+						var self = this;
+						// send image to socket.io
+						if (typeof resp.path != "undefined") {
+							socket.emit("image", resp.path);
+
+							// Remove sent image
+							setTimeout(function() {
+								self.removeFile(file);
+							}, 1000)
+						}
+					});
+
+					this.on("thumbnail", function(file) {
+						if ( file.width < 640 ) {
+							file.rejectDimensions();
+						}
+						else {
+							file.acceptDimensions();
+						}
+					});
+
+					this.on("addedfile", function(file) {
+						var removeButton = Dropzone.createElement("<button>Remove file</button>");
+						var self = this;
+						removeButton.addEventListener("click", function(e) {
+							e.preventDefault();
+							e.stopPropagation();
+							self.removeFile(file);
+						});
+						file.previewElement.appendChild(removeButton);
+					});
+				},
+				accept: function(file, done) {
+					file.acceptDimensions = done;
+					file.rejectDimensions = function() {
+						done("The image must be at least 640 x 480px");
+					};
+				}
+			};
+
+			// Send sound to server
+			Dropzone.options.formUploadSound = {
+				paramName: "file",
+				maxFilesize: 10, // MB
+				dictDefaultMessage: "Drag a sound here to upload, or click to select one",
+				acceptedFiles: "audio/mpeg,audio/mp3",
+				init: function() {
+					this.on("success", function( file, resp ){
+						console.log( file );
+						console.log( resp );
+
+						var self = this;
+						// send image to socket.io
+						if (typeof resp.filename != "undefined") {
+							let fileWoExt = resp.filename.replace(/\.[^/.]+$/, '');
+							let sound = {
+								name : $("#sound-title").val(),
+								sound : fileWoExt
+							}
+							socket.emit("sound", sound);
+
+							// Remove sent image
+							setTimeout(function() {
+								self.removeFile(file);
+							}, 1000)
+						}
+					});
+
+					this.on("addedfile", function(file) {
+						console.log(file);
+						var removeButton = Dropzone.createElement("<button>Remove file</button>");
+						var self = this;
+						removeButton.addEventListener("click", function(e) {
+							e.preventDefault();
+							e.stopPropagation();
+							self.removeFile(file);
+						});
+						file.previewElement.appendChild(removeButton);
+					});
+				}
+			};
+
+			// Send prod mode to server
+			$("#form-prodmode").submit(function(){
+				var sendProdmode = false;
+				if ($("#send-prodmode").is(":checked")) {
+					sendProdmode = true;
+				}
+				socket.emit("prodmode", sendProdmode);
+				return false;
+			});
+
+			// Send abort to server
+			$("#form-abort").submit(function(){
+				socket.emit("abort");
+				return false;
+			});
+		</script>
+
+	</body>
+</html>

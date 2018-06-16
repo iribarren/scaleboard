@@ -1,0 +1,26 @@
+{
+  "name": "scaleboard",
+  "description": "real time information screen",
+  "main": "index.js",
+  "authors": [
+    "JPerez <jesus.perez@scalefast.com>",
+    "Paul <paul.davidson@scalefast.com>",
+    "Jesus <juanjose.perez@scalefast.com>",
+    "Aritz <aritz.iribarren@scalefast.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "dropzone": "https://github.com/enyo/dropzone.git#^4.3.0",
+    "ion-sound": "ionsound#^3.0.7"
+  }
+}

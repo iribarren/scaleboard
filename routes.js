@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = function(app) {
     var bodyParser = require("body-parser");
     var multer = require('multer');
@@ -23,14 +25,20 @@ module.exports = function(app) {
     // create application/x-www-form-urlencoded parser
     var urlencodedParser = bodyParser.urlencoded({extended: false})
 
+    var viewDir = __dirname + '/views/';
+
     // Screen route (the screen that receive messages)
     app.get('/screen', function (req, res, next) {
-        res.sendFile(__dirname + '/screen.html');
+        res.sendFile(viewDir + 'screen.html');
     });
 
     // Control panel route (the screen that send messages)
     app.get('/controlpanel', function (req, res, next) {
-        res.sendFile(__dirname + '/controlpanel.html');
+        res.sendFile(viewDir + 'controlpanel.html');
+    });
+
+    app.get('/sim', function (req, res, next) {
+        res.sendFile(viewDir + 'simulate-plugin.html');
     });
 
     // API

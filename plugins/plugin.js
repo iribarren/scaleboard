@@ -1,7 +1,11 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//hopefully this will a parent class for every plugin, so constructor code
+//is not duplicated. but will js allow us to do this. only time will tell
+class plugin {
 
+    constructor(config, queue) {
+        this.config = config;
+        this.queue = queue;
+    }
+}
 
+module.exports = plugin;

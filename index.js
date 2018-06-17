@@ -3,6 +3,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var control = require('./control');
+var queue = require('./queue');
 
 //var mime       = require('mime');
 
@@ -24,7 +25,8 @@ var ctrl = new control();
 
 // Socket.io connections
 io.on('connection', function (socket) {
-    ctrl.init(socket);
+    var q = new queue(socket);
+    ctrl.init(q);
     
     // Message handler
     socket.on('message', function (msg) {

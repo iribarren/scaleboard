@@ -1,17 +1,14 @@
 class plugin_hello {
 
-    constructor(config, socket) {
+    constructor(config, queue) {
         this.config = config;
-        this.socket = socket;
+        this.queue = queue;
     }
     
     fire() {
-        this.paint();
-        console.log(this.config);
-    }
-    
-    paint() {
-        this.socket.emit("message", this.config.name);
+        console.log ("fire del plugin hello")
+        this.data = "hello";
+        this.queue.push(this);
     }
 }
 

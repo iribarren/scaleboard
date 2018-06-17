@@ -1,12 +1,14 @@
 class plugin_bye {
 
-    constructor(config) {
-        //this.config = require('./plugins.json');
+    constructor(config, queue) {
         this.config = config;
+        this.queue = queue;
     }
     
     fire() {
-        console.log(this.config);
+        console.log ("fire del plugin bye")
+        this.data = "bye";
+        this.queue.push(this);
     }
 }
 

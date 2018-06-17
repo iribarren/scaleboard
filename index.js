@@ -1,3 +1,8 @@
+"use strict";
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -13,12 +18,13 @@ require('string.prototype.startswith');
 app.use('/assets', express.static(__dirname + '/bower_components'));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use('/statics', express.static(__dirname + '/statics'));
+app.use('/views', express.static(__dirname + '/views'));
 
 require('./routes')(app);
 
 // Init the server
-server.listen(3000, function () {
-    console.log('listening on *:3000');
+server.listen(port, hostname, function () {
+    console.log(`listening on http://${hostname}:${port}`);
 });
 
 var ctrl = new control();
@@ -28,6 +34,11 @@ io.on('connection', function (socket) {
     var q = new queue(socket);
     ctrl.init(q);
     
+    // Plugin handler
+    socket.on("plugin", function(data) {
+        io.emit("plugin", data);
+    });
+
     // Message handler
     socket.on('message', function (msg) {
         io.emit('message', msg);

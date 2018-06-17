@@ -1,0 +1,11 @@
+{
+    "id": "plugin-simulator", 
+    "name": "Plugin Simulator", 
+    "template": "/views/plugins/plugin_name/main.hbs", 
+    "data": [
+        "We are", 
+        "Paul", 
+        "& Beaches"
+    ], 
+    "data_interval": 3
+}

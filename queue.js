@@ -11,7 +11,9 @@
 
     pop() {
         var plugin = this.plugins.shift();
-        this.socket.emit("message",plugin.data);
+        if (plugin.data != undefined) {
+            this.socket.emit("plugin", plugin.data);
+        }
         plugin.fire();
     }
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plugin Simulator</title>
+    </head>
+    <body>
+        <!-- SEND PLUGIN -->
+        <form id="form-plugin" action="">
+            <button>Send</button>
+        </form>
+
+        <!-- SEND PLUGIN -->
+        <form id="form-plugin-2" action="">
+            <button>Send</button>
+        </form>
+
+            <script src="socket.io/socket.io.js"></script>
+        <script src="/assets/jquery/dist/jquery.min.js"></script>
+
+        <script>
+            // Init Socket.io
+            var socket = io.connect();
+
+            // Send message to server
+            $("#form-plugin").submit(function () {
+                socket.emit("plugin", '{"id": "plugin-simulator", "name": "Plugin Simulator", "template": "/views/plugins/sim.hbs", "data": ["We are", "Paul", "& Bitches"], "data_interval": 3}');
+                return false;
+            });
+
+            // Send message to server
+            $("#form-plugin-2").submit(function () {
+                socket.emit("plugin", '{"id": "plugin-simulator-2", "name": "Plugin Simulator 2", "template": "/views/plugins/sim.hbs", "data": ["Chuck", "Norris", "is love"], "data_interval": 5}');
+                return false;
+            });
+        </script>
+    </body>
+</html>

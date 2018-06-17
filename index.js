@@ -7,6 +7,9 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var control = require('./control');
+var queue = require('./queue');
+
 //var mime       = require('mime');
 
 require('string.prototype.startswith');
@@ -24,8 +27,13 @@ server.listen(port, hostname, function () {
     console.log(`listening on http://${hostname}:${port}`);
 });
 
+var ctrl = new control();
+
 // Socket.io connections
 io.on('connection', function (socket) {
+    var q = new queue(socket);
+    ctrl.init(q);
+    
     // Plugin handler
     socket.on("plugin", function(data) {
         io.emit("plugin", data);

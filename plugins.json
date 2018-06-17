@@ -1,10 +1,8 @@
 {
-    "hello": {
-        "name": "hello",
-        "id": "1"
-    },
-    "bye": {
-        "name": "bye",
-        "id": "2"
+    "chuck": {
+        "name": "chuck",
+        "id": "1",
+        "max_pages": 5,
+        "max_items_page": 5
     }
 }

@@ -11,6 +11,7 @@
 
     pop() {
         var plugin = this.plugins.shift();
+        console.log(plugin.data);
         this.socket.emit("message",plugin.data);
         plugin.fire();
     }

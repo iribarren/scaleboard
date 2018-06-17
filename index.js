@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var control = require('./control');
+
 //var mime       = require('mime');
 
 require('string.prototype.startswith');
@@ -18,9 +20,12 @@ server.listen(3000, function () {
     console.log('listening on *:3000');
 });
 
+var ctrl = new control();
+
 // Socket.io connections
 io.on('connection', function (socket) {
-
+    ctrl.init(socket);
+    
     // Message handler
     socket.on('message', function (msg) {
         io.emit('message', msg);

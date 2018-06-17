@@ -9,12 +9,16 @@ class plugin_chuck extends plugin{
 
     fire() {
         var self = this;
-        this.data = this.call_api(function(value){
-            self.data = value;
-            console.log("data del plugin: "+self.data)
+        this.call_api(function(value) {
+            self.data = {
+                "id": "chuck-quotes", 
+                "name": "Chuck Norris Quotes", 
+                "template": "/views/plugins/chuck/main.hbs", 
+                "data": [value], 
+                "data_interval": 3
+            };
             self.queue.push(self);
         })
-        
     }
 
     call_api(cb) {
@@ -22,7 +26,6 @@ class plugin_chuck extends plugin{
             if (err) {
                 return console.log(err);
             }
-            console.log(body.value);
             cb(body.value);
         });
     }

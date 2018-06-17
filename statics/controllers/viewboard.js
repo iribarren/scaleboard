@@ -17,7 +17,6 @@ class Viewboard {
             var template = self.templateEngine.compile(html);
             var i = 0;
             window.timer = setInterval(function() {
-                console.log(data_set);
                 var data_interval = {
                     id: plugin_id,
                     name: plugin_name,
@@ -30,7 +29,6 @@ class Viewboard {
     }
 
     renderInterval(data_interval) {
-        console.log(data_interval);
         var rendered_html = data_interval.template(data_interval);
         $("#viewboard").html(rendered_html);
     }

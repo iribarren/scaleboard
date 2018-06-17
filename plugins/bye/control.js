@@ -6,7 +6,6 @@ class plugin_bye {
     }
     
     fire() {
-        console.log ("fire del plugin bye")
         this.data = "bye";
         this.queue.push(this);
     }

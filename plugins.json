@@ -1,7 +1,13 @@
 {
-    "renfe": {
+    "chuck": {
         "name": "chuck",
         "id": "1",
+        "max_pages": 5,
+        "max_items_page": 5
+    },
+    "renfe": {
+        "name": "renfe",
+        "id": "2",
         "max_pages": 5,
         "max_items_page": 5
     },

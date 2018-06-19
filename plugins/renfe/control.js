@@ -19,7 +19,13 @@ class plugin_renfe extends plugin{
             for (var i = 1; i<trs.length;i++) {
                 tds.push(trs[i].querySelectorAll("td")[2].textContent);
             }
-            self.data = value;
+            self.data = {
+                "id": "plugin-renfe", 
+                "name": "Next Trains", 
+                "template": "/views/plugins/renfe/main.hbs", 
+                "data": tds, 
+                "data_interval": 3
+            };
             self.queue.push(self);
         })
         

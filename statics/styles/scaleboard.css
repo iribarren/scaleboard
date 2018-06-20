@@ -1,0 +1,17 @@
+.bg-navbar {
+    background-color: rgba(255, 255, 255, 0.9)
+}
+
+.card {
+    font-size: 2rem;
+}
+
+.bg-window-1 {
+    border-color: rgba(34, 0, 97, 1);
+}
+.bg-window-1 > .card-header {
+    background-color: rgba(34, 0, 97, 0.8);
+}
+.bg-window-1 > .card-body {
+    background-color: rgba(34, 0, 97, 0.7);
+}

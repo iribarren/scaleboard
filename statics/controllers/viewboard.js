@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 class Viewboard {
     constructor() {
@@ -6,30 +6,30 @@ class Viewboard {
     }
 
     render(data) {
-        var plugin_id = data.id;
-        var template_src = data.template;
-        var plugin_name = data.name;
-        var data_set = data.data;
-        var data_set_interval = data.data_interval;
+        let plugin_id = data.id;
+        let template_src = data.template;
+        let plugin_name = data.name;
+        let data_set = data.data;
+        let data_set_interval = data.data_interval;
 
-        var self = this;
+        let self = this;
         $.get(template_src, function(html) {
-            var template = self.templateEngine.compile(html);
-            var i = 0;
+            let template = self.templateEngine.compile(html);
+            let i = 0;
             window.timer = setInterval(function() {
-                var data_interval = {
+                let data_interval = {
                     id: plugin_id,
                     name: plugin_name,
                     data: data_set[i % data_set.length],
                     template: template
-                }
-                self.renderInterval(data_interval, i++ % data_set.length);
+                };
+                Viewboard.renderInterval(data_interval, i++ % data_set.length);
             }, data_set_interval * 1000);
         });
     }
 
-    renderInterval(data_interval) {
-        var rendered_html = data_interval.template(data_interval);
-        $("#viewboard").html(rendered_html);
+    static renderInterval(data_interval) {
+        let rendered_html = data_interval.template(data_interval);
+        $("#viewboard-1").html(rendered_html);
     }
 }

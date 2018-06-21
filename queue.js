@@ -12,7 +12,7 @@
     pop() {
         var plugin = this.plugins.shift();
         if (plugin.data != undefined) {
-            this.socket.emit("plugin", plugin.data);
+            this.socket.emit("viewboard-1", plugin.data);
         }
         plugin.fire();
     }

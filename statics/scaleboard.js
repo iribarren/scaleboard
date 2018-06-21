@@ -1,14 +1,20 @@
-"use strict"
+"use strict";
 
 // Init Timer
-window.timer;
+window.timer = undefined;
 
 // Init Socket.io
-var socket = io.connect();
+const socket = io.connect();
 
 // Receive plugin data from server
-socket.on("plugin", function(data) {
+socket.on("viewboard-1", function(data) {
     clearInterval(window.timer);
-    var viewboard = new Viewboard();
+    let viewboard = new Viewboard();
+    viewboard.render(data);
+});
+
+socket.on("viewboard-2", function(data) {
+    clearInterval(window.timer);
+    let viewboard = new Viewboard();
     viewboard.render(data);
 });

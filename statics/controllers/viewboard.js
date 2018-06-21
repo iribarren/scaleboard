@@ -6,6 +6,7 @@ class Viewboard {
     }
 
     render(data) {
+        let queue_num = data.queue;
         let plugin_id = data.id;
         let template_src = data.template;
         let plugin_name = data.name;
@@ -23,13 +24,14 @@ class Viewboard {
                     data: data_set[i % data_set.length],
                     template: template
                 };
-                Viewboard.renderInterval(data_interval, i++ % data_set.length);
+                Viewboard.renderInterval(data_interval, i++ % data_set.length, queue_num);
             }, data_set_interval * 1000);
         });
     }
 
-    static renderInterval(data_interval) {
+    static renderInterval(data_interval, queue_num) {
+        console.log("Rendering Data...");
         let rendered_html = data_interval.template(data_interval);
-        $("#viewboard-1").html(rendered_html);
+        $("#viewboard-"+queue_num).html(rendered_html);
     }
 }

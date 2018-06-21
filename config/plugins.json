@@ -1,22 +1,29 @@
-{
-    "chuck": {
-        "name": "chuck",
-        "id": "1",
-        "max_pages": 5,
-        "max_items_page": 5
+[
+    {
+        "id": "chuck", 
+        "name": "Chuck Norris Quotes", 
+        "template": "/views/plugins/chuck/main.hbs", 
+        "data_interval": 3,
+        "queue": 1,
+        "duration": 6
     },
-    "renfe": {
-        "name": "renfe",
-        "id": "2",
-        "max_pages": 5,
-        "max_items_page": 5
+    {
+        "id": "renfe",
+        "name": "Renfe Schedule",
+        "template": "/views/plugins/renfe/main.hbs", 
+        "data_interval": 3,
+        "queue": 2,
+        "duration": 6
     },
-    "twitter": {
-        "name": "twitter",
-        "id": "4",
+    {
+        "id": "twitter",
+        "name": "Twitter Mentions",
+        "template": "/views/plugins/twitter/main.hbs",
         "consumer_key": "nVWA26N1geBj5fO2kwtzZlfpZ",
         "consumer_secret": "vBmjsBPcXharm7JoFTgCeiPotAqvG7RGR1qi6q7Jf20cdy1R3Y",
         "access_token": "1008265830436614144-PEzK1yPd2cWvTq6VE98wyZyzvqVKnD",
-        "access_token_secret": "Tk3QNVNk4kJb1Ke56v1JJRsHGrLJUEvLr7tYykc2WtbJ2"
+        "access_token_secret": "Tk3QNVNk4kJb1Ke56v1JJRsHGrLJUEvLr7tYykc2WtbJ2",
+        "queue": 1,
+        "duration": 10
     }
-}
+]

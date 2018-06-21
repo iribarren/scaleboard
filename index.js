@@ -1,6 +1,6 @@
 "use strict";
 
-const hostname = '192.168.56.20';
+const hostname = '127.0.0.1';
 const port = 3000;
 
 var express = require('express');
@@ -27,41 +27,17 @@ server.listen(port, hostname, function () {
     console.log(`listening on http://${hostname}:${port}`);
 });
 
-var ctrl = new control();
-
 // Socket.io connections
-io.on('connection', function (socket) {
-    var q = new queue(socket);
-    ctrl.init(q);
-    
-    // Plugin handler
-    socket.on("plugin", function(data) {
-        io.emit("plugin", data);
-    });
+io.on("connection", function (socket) {
+    let q = new queue(socket, 1);
+    let ctrl = new control(q);
+    console.log("Initializing ctrl");
+    ctrl.init();
+});
 
-    // Message handler
-    socket.on('message', function (msg) {
-        io.emit('message', msg);
-    });
-
-    // Image handler
-    socket.on('image', function (msg) {
-        io.emit('image', msg);
-    });
-
-    // PROD MODE handler
-    socket.on('prodmode', function (msg) {
-        io.emit('prodmode', msg);
-    });
-
-    // sound handler
-    socket.on('sound', function (msg) {
-        io.emit('sound', msg);
-    });
-
-    // abort handler
-    socket.on('abort', function () {
-        io.emit('abort');
-    });
-
+io.on("connection", function(socket) {
+    let q = new queue(socket, 2);
+    var ctrl = new control(q);
+    console.log("Initializing ctrl");
+    ctrl.init();
 });

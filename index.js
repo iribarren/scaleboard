@@ -7,8 +7,8 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var control = require('./control');
-var queue = require('./queue');
+var control = require('./lib/control');
+var queue = require('./lib/queue');
 
 //var mime       = require('mime');
 

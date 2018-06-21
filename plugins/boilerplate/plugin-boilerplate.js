@@ -1,4 +1,6 @@
-class plugin_hello {
+const plugin = require('../plugin');
+
+class plugin_name {
 
     constructor(config, queue) {
         this.config = config;
@@ -6,9 +8,9 @@ class plugin_hello {
     }
     
     fire() {
-        this.data = "hello";
+        //retrieve data
         this.queue.push(this);
     }
 }
 
-module.exports = plugin_hello;
+module.exports = plugin_name;

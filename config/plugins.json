@@ -1,22 +1,38 @@
-{
-    "chuck": {
-        "name": "chuck",
-        "id": "1",
-        "max_pages": 5,
-        "max_items_page": 5
-    },
-    "renfe": {
-        "name": "renfe",
-        "id": "2",
-        "max_pages": 5,
-        "max_items_page": 5
-    },
-    "twitter": {
-        "name": "twitter",
-        "id": "4",
-        "consumer_key": "nVWA26N1geBj5fO2kwtzZlfpZ",
-        "consumer_secret": "vBmjsBPcXharm7JoFTgCeiPotAqvG7RGR1qi6q7Jf20cdy1R3Y",
-        "access_token": "1008265830436614144-PEzK1yPd2cWvTq6VE98wyZyzvqVKnD",
-        "access_token_secret": "Tk3QNVNk4kJb1Ke56v1JJRsHGrLJUEvLr7tYykc2WtbJ2"
-    }
-}
+[
+  {
+    "id": "chuck",
+    "name": "Chuck Norris Quotes",
+    "template": "/views/plugins/chuck/main.hbs",
+    "data_interval": 5,
+    "queue": 1,
+    "duration": 10
+  },
+  {
+    "id": "renfe",
+    "name": "Renfe Schedule",
+    "template": "/views/plugins/renfe/main.hbs",
+    "data_interval": 2,
+    "queue": 2,
+    "duration": 10
+  },
+  {
+    "id": "twitter",
+    "name": "Twitter Mentions",
+    "template": "/views/plugins/twitter/main.hbs",
+    "consumer_key": "nVWA26N1geBj5fO2kwtzZlfpZ",
+    "consumer_secret": "vBmjsBPcXharm7JoFTgCeiPotAqvG7RGR1qi6q7Jf20cdy1R3Y",
+    "access_token": "1008265830436614144-PEzK1yPd2cWvTq6VE98wyZyzvqVKnD",
+    "access_token_secret": "Tk3QNVNk4kJb1Ke56v1JJRsHGrLJUEvLr7tYykc2WtbJ2",
+    "queue": 1,
+    "data_interval": 5,
+    "duration": 10
+  },
+  {
+    "id": "weather",
+    "name": "El tiempo",
+    "template": "/views/plugins/weather/main.hbs",
+    "queue": 2,
+    "data_interval": 5,
+    "duration": 10
+  }
+]

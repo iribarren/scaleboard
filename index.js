@@ -27,41 +27,17 @@ server.listen(port, hostname, function () {
     console.log(`listening on http://${hostname}:${port}`);
 });
 
-var ctrl = new control();
-
 // Socket.io connections
-io.on('connection', function (socket) {
-    var q = new queue(socket);
-    ctrl.init(q);
-    
-    // Plugin handler
-    socket.on("plugin", function(data) {
-        io.emit("plugin", data);
+io.sockets.on("connection", function (socket) {
+    socket.on("room", function(room) {
+        socket.join(room);
     });
-
-    // Message handler
-    socket.on('message', function (msg) {
-        io.emit('message', msg);
-    });
-
-    // Image handler
-    socket.on('image', function (msg) {
-        io.emit('image', msg);
-    });
-
-    // PROD MODE handler
-    socket.on('prodmode', function (msg) {
-        io.emit('prodmode', msg);
-    });
-
-    // sound handler
-    socket.on('sound', function (msg) {
-        io.emit('sound', msg);
-    });
-
-    // abort handler
-    socket.on('abort', function () {
-        io.emit('abort');
-    });
-
 });
+
+let q1 = new queue(io, 1);
+let ctrl1 = new control(q1);
+ctrl1.init();
+
+let q2 = new queue(io, 2);
+let ctrl2 = new control(q2);
+ctrl2.init();

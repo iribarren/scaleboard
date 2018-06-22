@@ -9,12 +9,7 @@ class plugin_twitter extends plugin {
     
     fire() {
         var T = new Twit(this.config);
-        var response_object = {
-            "id": "plugin-twitter", 
-            "name": "Twitter Plugin", 
-            "template": "/views/plugins/twitter/main.hbs",
-            "data_interval": 3
-        }
+        var response_object = this.config;
         var array_tweets = [];
         var params = {screen_name: 'Scaleboard9', count: '10'};
         var self = this;

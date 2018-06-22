@@ -14,6 +14,14 @@ if (plugin_name === undefined) {
 
 const config = require('./config/plugins.json');
 
+let index_plugin;
+for (index in config) {
+    if (config[index].name === plugin_name) {
+        index_plugin = index;
+        break;
+    }
+}
+
 switch (operation) {
     case 'add':
         fs.mkdir('./plugins/'+plugin_name+'/',function (err) {
@@ -36,7 +44,7 @@ switch (operation) {
         });
         break;
     case 'enable':
-        if (plugin_name in config) {
+        if (index_plugin !== undefined) {
             console.log("plugin already configured");
             process.exit(1);
         } else {
@@ -46,25 +54,30 @@ switch (operation) {
                     if (err) throw err;
                 });
             });
-            config[plugin_name] = {};
-            config[plugin_name].name = plugin_name;
-            
+            let plugin_obj = {"name": plugin_name};
+            config.push(plugin_obj);
+
             fs.writeFile('./config/plugins.json', JSON.stringify(config), 'utf8', function (err, file) {
                 if (err) throw err;
             });
         }
         break;
     case 'disable':
-        fs.unlink('./views/plugins/'+plugin_name+'/main.hbs', function (err, file) {
-            if (err) throw err;
-            fs.rmdir('./views/plugins/'+plugin_name+'/',function (err) {
+        if (index_plugin === undefined) {
+            console.log("plugin not configured");
+            process.exit(1);
+        } else {
+            fs.unlink('./views/plugins/' + plugin_name + '/main.hbs', function (err, file) {
+                if (err) throw err;
+                fs.rmdir('./views/plugins/' + plugin_name + '/', function (err) {
+                    if (err) throw err;
+                });
+            });
+            delete config[index_plugin];
+            fs.writeFile('./config/plugins.json', JSON.stringify(config), 'utf8', function (err, file) {
                 if (err) throw err;
             });
-        });
-        delete config.plugin_name;
-        fs.writeFile('./config/plugins.json', JSON.stringify(config), 'utf8', function (err, file) {
-            if (err) throw err;
-        });
+        }
         break;
     default:
         console.log("Unknown operation");

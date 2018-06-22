@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" type="text/css" media="screen" href="/assets/bootstrap4/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="/statics/styles/scaleboard.css" />
 
         <!-- For weather plugin. We need a better way to include plugins styles :) -->
         <link rel="stylesheet" type="text/css" media="screen" href="/assets/weather-icons/css/weather-icons.min.css" />
@@ -12,7 +13,16 @@
         <title>Scaleboard</title>
     </head>
     <body>
-        <div class="container-fluid" id="viewboard">
+        <nav class="navbar navbar-light bg-navbar">
+            <a class="navbar-brand">
+                <img src="/statics/images/scalefast-logo.svg" class="img-responsive" />
+            </a>
+        </nav>
+        <div class="container-fluid" id="viewboard" style="padding: 2%;">
+            <div class="row">
+                <div class="col-sm-8" id="viewboard-1"></div>
+                <div class="col-sm-4" id="viewboard-2"></div>
+            </div>
         </div>
 
         <!-- Optional JavaScript -->

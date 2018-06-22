@@ -28,16 +28,16 @@ server.listen(port, hostname, function () {
 });
 
 // Socket.io connections
-io.on("connection", function (socket) {
-    let q = new queue(socket, 1);
-    let ctrl = new control(q);
-    console.log("Initializing ctrl");
-    ctrl.init();
+io.sockets.on("connection", function (socket) {
+    socket.on("room", function(room) {
+        socket.join(room);
+    });
 });
 
-io.on("connection", function(socket) {
-    let q = new queue(socket, 2);
-    var ctrl = new control(q);
-    console.log("Initializing ctrl");
-    ctrl.init();
-});
+let q1 = new queue(io, 1);
+let ctrl1 = new control(q1);
+ctrl1.init();
+
+let q2 = new queue(io, 2);
+let ctrl2 = new control(q2);
+ctrl2.init();

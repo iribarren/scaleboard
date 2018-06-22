@@ -17,13 +17,8 @@ class plugin_weather {
                 "weather_icon": value.weather[0].id,
                 "temp" : value.main.temp
             };
-            self.data = {
-                "id": "plugin_weather", 
-                "name": "El tiempo en Madrid️", 
-                "template": "/views/plugins/weather/main.hbs", 
-                "data": [weather_data], 
-                "data_interval": 1
-            };
+            self.data = self.config;
+            self.data.data = [weather_data];
             self.queue.push(self);
         })
     }

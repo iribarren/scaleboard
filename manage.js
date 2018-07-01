@@ -1,4 +1,5 @@
 var fs = require('fs');
+var readline = require('readline-sync');
 
 const operation = process.argv[2];
 if (operation === undefined) {
@@ -10,9 +11,14 @@ const plugin_name = process.argv[3];
 if (plugin_name === undefined) {
     console.log("No plugin name given");
     process.exit(1);
+
 }
 
-const config = require('./config/plugins.json');
+try {
+    const config = require('./config/plugins.json');
+} catch (e) {
+    const config = [];
+}
 
 let index_plugin;
 for (index in config) {
@@ -50,13 +56,20 @@ switch (operation) {
         } else {
             fs.mkdir('./views/plugins/'+plugin_name+'/',function (err) {
                 if (err) throw err;
-                fs.link('./plugins/'+plugin_name+'/main.hbs', './views/plugins/'+plugin_name+'/main.hbs', function (err, file) {
+                fs.symlink('./plugins/'+plugin_name+'/main.hbs', './views/plugins/'+plugin_name+'/main.hbs', function (err, file) {
                     if (err) throw err;
                 });
             });
-            let plugin_obj = {"name": plugin_name};
+            //read example config from plugin, and ask for values
+            const plugin_config_file = require('./plugins/'+plugin_name+'/config.example.json');
+            let value;
+            let plugin_obj = {}
+            for (let index in plugin_config_file) {
+                 value = readline.question("Give a value for "+index); 
+                 plugin_obj[index] = value;
+            }
+            
             config.push(plugin_obj);
-
             fs.writeFile('./config/plugins.json', JSON.stringify(config), 'utf8', function (err, file) {
                 if (err) throw err;
             });

@@ -22,16 +22,15 @@ class Viewboard {
                 let data_interval = {
                     id: plugin_id,
                     name: plugin_name,
-                    data: data_set[i++ % data_set.length],
-                    template: template
+                    data: data_set[i++ % data_set.length]
                 };
-                Viewboard.renderInterval(data_interval, room_num);
+                Viewboard.renderInterval(data_interval, template, room_num);
             }, data_set_interval * 1000);
         });
     }
 
-    static renderInterval(data_interval, room_num) {
-        let rendered_html = data_interval.template(data_interval);
+    static renderInterval(data_interval, template, room_num) {
+        let rendered_html = template(data_interval);
         $("#viewboard-"+room_num).html(rendered_html);
     }
 }

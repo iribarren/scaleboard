@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card text-white bg-window-1" id="{{id}}_plugin">
+            <div class="card-header">{{name}}</div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    {{#data}}
+                        <li class="media">
+                            <img src="{{profile_image_url}}" alt="@{{user_name}}" class="mr-4">
+                            <div class="media-body">
+                                <h5>{{screen_name}} <small class="text-light">@{{user_name}}</small></h5>
+                                <p>{{text}}</p>
+                            </div>
+                        </li>
+                    {{/data}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

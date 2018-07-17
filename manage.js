@@ -31,7 +31,7 @@ switch (operation) {
                 data = file.toString();
                 data.replace('name',plugin_name);
                 fs.writeFile('./plugins/'+plugin_name+'/main.js', data,function (err, file) {
-                if (err) throw err;
+                    if (err) throw err;
                 });  
             });
             fs.readFile('./plugins/boilerplate/plugin-boilerplate.hbs', function (err, file) {

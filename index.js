@@ -1,14 +1,15 @@
 "use strict";
 
+const queues_num = 2;
 const hostname = '127.0.0.1';
 const port = 3000;
 
-var express = require('express');
-var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
-var control = require('./lib/control');
-var queue = require('./lib/queue');
+let express = require('express');
+let app = express();
+let server = require('http').Server(app);
+let io = require('socket.io')(server);
+let control = require('./lib/control');
+let queue = require('./lib/queue');
 
 //var mime       = require('mime');
 
@@ -34,10 +35,7 @@ io.sockets.on("connection", function (socket) {
     });
 });
 
-let q1 = new queue(io, 1);
-let ctrl1 = new control(q1);
-ctrl1.init();
-
-let q2 = new queue(io, 2);
-let ctrl2 = new control(q2);
-ctrl2.init();
+for (let i = 1; i <= queues_num; i++) {
+    let ctrl = new control(new queue(io, i));
+    ctrl.init();
+}

@@ -2,5 +2,5 @@ nbproject/
 node_modules/
 bower_components/
 .idea/
-views/plugins
 config/plugins.json
+views/plugins

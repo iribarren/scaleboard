@@ -1,7 +1,5 @@
 const plugin = require('../plugin');
 const request = require('request');
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
 
 class plugin_renfe extends plugin{
 
@@ -11,34 +9,35 @@ class plugin_renfe extends plugin{
 
     fire() {
         var self = this;
-        var trs;
-        var tds = [];
+        var i;
         this.call_api(function(value){
-            const dom = new JSDOM(value);
-            trs = dom.window.document.querySelectorAll("#tabla tr");
-            for (var i = 1; i<trs.length;i++) {
-                tds.push(trs[i].querySelectorAll("td")[2].textContent);
+            let aranjuez_data ={
+                name: 'Aranjuez',
+                hours: []
+            };
+            let centro_data = {
+                name: 'Centro',
+                hours: []
+            };
+            let lines = (JSON.parse(value)).lines;
+            for (i in lines) {
+                if (lines[i].lineBound === "Aranjuez"){
+                    aranjuez_data.hours.push(lines[i].waitTime);
+                } else {
+                    centro_data.hours.push(lines[i].waitTime);
+                }
             }
+            
             self.data = self.config;
-            self.data.data = tds;
+            self.data.data = [aranjuez_data, centro_data];
             self.queue.push(self);
         })
         
     }
 
     call_api(cb) {
-        request.post({
-            headers: {'content-type': 'application/x-www-form-urlencoded'},
-            url: 'http://horarios.renfe.com/cer/hjcer310.jsp',
-            form: { nucleo:'10',
-                        i:'s',
-                        cp:'NO',
-                        o:'60101',
-                        d:'18000',
-                        df: '20180617',
-                        ho: '18',
-                        hd: '19',
-                        TXTInfo: '' }
+        request.get({
+            url: 'https://api.interurbanos.welbits.com/v1/stop/5-70'
         }, function (error, response, body) {
             cb(body);
         });

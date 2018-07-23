@@ -10,8 +10,7 @@ let server = require('http').Server(app);
 let io = require('socket.io')(server);
 let control = require('./lib/control');
 let queue = require('./lib/queue');
-
-//var mime       = require('mime');
+let ip = require('ip');
 
 require('string.prototype.startswith');
 
@@ -32,6 +31,9 @@ server.listen(port, hostname, function () {
 io.sockets.on("connection", function (socket) {
     socket.on("room", function(room) {
         socket.join(room);
+        if (room == 'ip') {
+            io.sockets.in("ip").emit("message_ip", ip.address());
+        }
     });
 });
 

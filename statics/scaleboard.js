@@ -8,6 +8,7 @@ const viewboards = [new Viewboard(), new Viewboard()];
 socket.on("connect", function() {
     socket.emit("room", "viewboard-1");
     socket.emit("room", "viewboard-2");
+    socket.emit("room", "ip");
 });
 
 socket.on("message", function (data) {
@@ -16,3 +17,8 @@ socket.on("message", function (data) {
         viewboards[data.queue - 1].render(data);
     }
 });
+
+socket.on("message_ip", function (data) {
+    $("#ip").html(data);
+});
+

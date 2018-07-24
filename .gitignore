@@ -4,3 +4,4 @@ bower_components/
 .idea/
 config/plugins.json
 views/plugins
+views/plugins/*

@@ -14,11 +14,15 @@ if (plugin_name === undefined) {
 
 }
 
+let config = [];
+
 try {
-    const config = require('./config/plugins.json');
+    config = require('./config/plugins.json');
 } catch (e) {
-    const config = [];
+    config = [];
 }
+
+
 
 let index_plugin;
 for (index in config) {
@@ -56,7 +60,7 @@ switch (operation) {
         } else {
             fs.mkdir('./views/plugins/'+plugin_name+'/',function (err) {
                 if (err) throw err;
-                fs.symlink('./plugins/'+plugin_name+'/main.hbs', './views/plugins/'+plugin_name+'/main.hbs', function (err, file) {
+                fs.symlink('../../../plugins/'+plugin_name+'/main.hbs', './views/plugins/'+plugin_name+'/main.hbs', function (err, file) {
                     if (err) throw err;
                 });
             });
@@ -65,7 +69,7 @@ switch (operation) {
             let value;
             let plugin_obj = {}
             for (let index in plugin_config_file) {
-                 value = readline.question("Give a value for "+index); 
+                 value = readline.question("Give a value for "+index+" : "); 
                  plugin_obj[index] = value;
             }
             

@@ -44,11 +44,28 @@ class prodNews extends plugin {
     }
 
     static treat_response(results) {
+        if (Array.isArray(results)) {
+            results.sort(function (a, b) {
+                let aDate = new Date(a.updated_at);
+                let bDate = new Date(b.updated_at);
+                if (aDate < bDate) {
+                    return -1;
+                } else if (aDate > bDate) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+        }
+
+        const english = new Intl.DateTimeFormat('en');
         let merge_requests = [];
         let result = [];
         for (let i = 0; i < results.length; i++) {
             result = results[i];
             result.description = converter.makeHtml(results[i].description);
+            let updated_at = new Date(results[i].updated_at);
+            result.updated_at = english.format(updated_at);
             merge_requests.push([result]);
         }
         return merge_requests;

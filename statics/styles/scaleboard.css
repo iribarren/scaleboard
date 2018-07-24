@@ -1,5 +1,9 @@
-.card {
+.card, .card h6 {
     font-size: 2rem;
+}
+
+.card h5 {
+    font-size: 2.5rem;
 }
 
 .bg-navbar {
@@ -15,4 +19,8 @@
 }
 .bg-window-1 > .card-body {
     background-color: rgba(0, 126, 178, 0.8);
+}
+
+#weather_plugin .card-body .card-text {
+    font-size: 4rem;
 }

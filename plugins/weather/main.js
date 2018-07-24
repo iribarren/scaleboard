@@ -15,7 +15,7 @@ class plugin_weather {
                 "weather": value.weather[0].main,
                 "weather_desc": value.weather[0].description,
                 "weather_icon": value.weather[0].id,
-                "temp" : value.main.temp
+                "temp": Math.round(value.main.temp)
             };
             self.data = self.config;
             self.data.data = [weather_data];

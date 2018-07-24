@@ -3,9 +3,9 @@
         <div class="card text-white bg-window-1" id="{{id}}_plugin">
             <div class="card-header">{{name}}</div>
             {{#data}}
-            <div class="card-body">
-                <p class="card-text"><i class="display-1 wi wi-owm-{{weather_icon}}"></i> <!-- {{weather}} --> {{temp}}ºC</p>
-            </div>
+                <div class="card-body">
+                    <p class="card-text"><i class="wi wi-owm-{{weather_icon}}"></i> <span>{{temp}}</span> <i class="wi wi-celsius"></i></p>
+                </div>
             {{/data}}
         </div>
     </div>

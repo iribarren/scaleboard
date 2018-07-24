@@ -9,7 +9,7 @@ class Viewboard {
     render(data) {
         let room_num = data.queue;
         let plugin_id = data.id;
-        let template_src = data.template;
+        let template_src = "/views/plugins/"+data.id+"/"+data.template;
         let plugin_name = data.name;
         let data_set = data.data;
         let data_set_interval = data.data_interval;

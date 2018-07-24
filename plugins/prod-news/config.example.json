@@ -1,0 +1,14 @@
+{
+    "id": "prod-news",
+    "name": "Prod News",
+    "template": "main.hbs",
+    "queue": 1,
+    "data_interval": 10,
+    "duration": 30,
+    "host": "https://setnext.scalefast.com",
+    "access_token": "",
+    "url_resource": {
+        "prefix": "/api",
+        "version": "/v4"
+    }
+}

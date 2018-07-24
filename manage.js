@@ -14,11 +14,15 @@ if (plugin_name === undefined) {
 
 }
 
+let config = [];
+
 try {
-    const config = require('./config/plugins.json');
+    config = require('./config/plugins.json');
 } catch (e) {
-    const config = [];
+    config = [];
 }
+
+
 
 let index_plugin;
 for (index in config) {

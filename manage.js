@@ -60,7 +60,7 @@ switch (operation) {
         } else {
             fs.mkdir('./views/plugins/'+plugin_name+'/',function (err) {
                 if (err) throw err;
-                fs.symlink('./plugins/'+plugin_name+'/main.hbs', './views/plugins/'+plugin_name+'/main.hbs', function (err, file) {
+                fs.symlink('../../../plugins/'+plugin_name+'/main.hbs', './views/plugins/'+plugin_name+'/main.hbs', function (err, file) {
                     if (err) throw err;
                 });
             });

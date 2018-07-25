@@ -67,13 +67,19 @@ that loads the dependencies of the plugin and must define a `fire()` method that
 This is the basic structure of a `main.js` file:
 
 ```html
-<div class="jumbotron" id="{{id}}_plugin">
-    <h1 class="display-4">{{name}}</h1>
-    {{#data}}
-    <div class="lead">
-        <!-- your content-->    
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card text-white bg-window-1" id="{{id}}_plugin">
+            <div class="card-header">{{name}}</div>
+            <div class="card-body">
+                {{#data}}
+                    
+                <!-- YOUR CONTENT -->    
+
+                {{/data}}
+            </div>
+        </div>
     </div>
-    {{/data}}
 </div>
 ```
 

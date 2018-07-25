@@ -51,6 +51,13 @@ switch (operation) {
                     if (err) throw err;
                 });
             });
+            fs.readFile('./plugins/boilerplate/plugin-config-boilerplate.json', function (err, file) {
+                if (err) throw err;
+                data = file.toString();
+                fs.writeFile('./plugins/'+plugin_name+'/config.example.json', data,function (err, file) {
+                    if (err) throw err;
+                });
+            });
         });
         break;
     case 'enable':

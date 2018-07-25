@@ -69,8 +69,12 @@ switch (operation) {
             let value;
             let plugin_obj = {}
             for (let index in plugin_config_file) {
-                 value = readline.question("Give a value for "+index+" : "); 
-                 plugin_obj[index] = value;
+                value = readline.question("Give a value for "+index+" ["+plugin_config_file[index] +"] : "); 
+                if (value == '' ) {
+                    plugin_obj[index] = plugin_config_file[index];
+                } else {
+                    plugin_obj[index] = value;
+                }
             }
             
             config.push(plugin_obj);

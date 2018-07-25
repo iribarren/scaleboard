@@ -81,12 +81,12 @@ This is the basic structure of a `config.example.json` file:
 
 ```javascript
 {
-    "id": "", //IDENTIFIER FOR THE PLUGIN - MUST BE THE SAME AS THE FOLDER WHERE IT IS STORED
-    "name": "", / NAME OF THE PLUGIN - IT WILL BE SHOWN IN THE HEADER OF THE INFO
-    "template": "", //FILE USED TO SHOW THE DATA
-    "data_interval": "", //SECONDS BETWEEN PAGINATION FOR PLUGIN DATA
-    "queue": "", //WHICH ON OF THE QUEUES IS GOING TO SHOW THE PLUGIN INFO (1,2)
-    "duration": "" //HOW LONG WILL THE PLUGIN STAY IN THE SCREEN - NOT WORKING YET
+    "id": "",            // IDENTIFIER FOR THE PLUGIN - MUST BE THE SAME AS THE FOLDER WHERE IT IS STORED
+    "name": "",          // NAME OF THE PLUGIN - IT WILL BE SHOWN IN THE HEADER OF THE INFO
+    "template": "",      // FILE USED TO SHOW THE DATA
+    "data_interval": "", // SECONDS BETWEEN PAGINATION FOR PLUGIN DATA
+    "queue": "",         // WHICH ON OF THE QUEUES IS GOING TO SHOW THE PLUGIN INFO (1,2)
+    "duration": ""       // HOW LONG WILL THE PLUGIN STAY IN THE SCREEN - NOT WORKING YET
 }
 ```
 These fields are required for all the plugins. Additional configuration fields can be added if needed.

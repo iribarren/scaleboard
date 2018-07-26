@@ -1,0 +1,8 @@
+{
+    "id": "gallery",
+    "name": "Photo Gallery",
+    "template": "main.hbs",
+    "data_interval": "6",
+    "queue": "1",
+    "duration": "30" 
+}

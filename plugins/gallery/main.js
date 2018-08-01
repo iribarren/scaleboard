@@ -11,7 +11,7 @@ class plugin_name {
     }
     
     fire() {
-        let statics = "statics/images/gallery/"
+        let statics = "statics/images/gallery/qtm_2018/photobooth";
         let media = __dirname+"/../../"+statics;
         let photos = [];
         let data_photos = [];

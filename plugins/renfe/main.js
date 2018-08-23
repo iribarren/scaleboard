@@ -21,10 +21,18 @@ class plugin_renfe extends plugin{
             };
             let lines = (JSON.parse(value)).lines;
             for (i in lines) {
-                if (lines[i].lineBound === "Aranjuez"){
-                    aranjuez_data.hours.push(lines[i].waitTime);
+                if (typeof lines[i].platform != 'undefined'){
+                    if (lines[i].platform == 1){
+                        aranjuez_data.hours.push(lines[i].waitTime);
+                    } else {
+                        centro_data.hours.push(lines[i].waitTime);
+                    }
                 } else {
-                    centro_data.hours.push(lines[i].waitTime);
+                    if (lines[i].lineBound === "A Aranjuez"){
+                        aranjuez_data.hours.push(lines[i].waitTime);
+                    } else {
+                        centro_data.hours.push(lines[i].waitTime);
+                    }
                 }
             }
             
